@@ -1,19 +1,19 @@
 package com.epam.hospital.entity;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class Patient extends Entity implements Serializable {
+public class Patient extends Entity {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private int doctorId;
 
-    public Patient(String firstName, String lastName, String phoneNumber, int doctorId) {
+    public Patient() {
+    }
+
+    public Patient(String firstName, String lastName, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.doctorId = doctorId;
     }
 
     public String getFirstName() {
@@ -40,38 +40,29 @@ public class Patient extends Entity implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Patient patient = (Patient) o;
-        return doctorId == patient.doctorId &&
-                Objects.equals(firstName, patient.firstName) &&
+        return Objects.equals(firstName, patient.firstName) &&
                 Objects.equals(lastName, patient.lastName) &&
                 Objects.equals(phoneNumber, patient.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, phoneNumber, doctorId);
+        return Objects.hash(super.hashCode(), firstName, lastName, phoneNumber);
     }
+
 
     @Override
     public String toString() {
-        return "Patients{" +
+        return "Patient{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", doctorId=" + doctorId +
                 '}';
     }
 }

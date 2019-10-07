@@ -1,13 +1,15 @@
 package com.epam.hospital.entity;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class Doctor extends Entity implements Serializable {
+public class Doctor extends Entity {
     private String firstName;
     private String lastName;
     private String section;
     private String phoneNumber;
+
+    public Doctor() {
+    }
 
     public Doctor(String firstName, String lastName, String section, String phoneNumber) {
         this.firstName = firstName;

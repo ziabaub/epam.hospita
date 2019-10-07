@@ -17,7 +17,7 @@ public class Reader {
 
     }
 
-    public static String nextString(){
+    public static String nextString() {
 
         String value;
         if (scanner.hasNext()) {

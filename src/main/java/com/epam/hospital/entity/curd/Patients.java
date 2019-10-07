@@ -5,49 +5,74 @@ import com.epam.hospital.entity.Patient;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Patients implements CRUD<Patient>, Serializable {
-    private List<Patient> patients;
+    private List<Patient> patientList;
 
     public Patients() {
-        patients = new ArrayList<>();
+        patientList = new ArrayList<>();
+    }
+
+    public List<Patient> getPatientList() {
+        return patientList;
     }
 
     @Override
     public void add(Patient entity) {
-        patients.add(entity);
+        patientList.add(entity);
     }
 
     @Override
     public Optional<Patient> getById(int id) {
-        return patients.stream().
-                filter(p-> p.getId()==id).
+        return patientList.stream().
+                filter(p -> p.getId() == id).
                 findFirst();
     }
 
     @Override
     public Optional<Patient> getByName(String name) {
-        return patients.stream().
-                filter(p-> p.getFirstName().equals(name)).
+        return patientList.stream().
+                filter(p -> p.getFirstName().equals(name)).
                 findFirst();
     }
 
     @Override
     public void update(int id, Patient entity) {
-        patients = patients.stream().
+        patientList = patientList.stream().
                 map(p -> (p.getId() == id) ? entity : p).
                 collect(Collectors.toList());
     }
 
     @Override
     public void delete(Patient entity) {
-        patients.removeIf(p -> p.equals(entity));
+        patientList.removeIf(p -> p.equals(entity));
     }
 
     @Override
     public void deleteById(int id) {
-        patients.removeIf(p -> p.getId() == id);
+        patientList.removeIf(p -> p.getId() == id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Patients patients1 = (Patients) o;
+        return Objects.equals(patientList, patients1.patientList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(patientList);
+    }
+
+    @Override
+    public String toString() {
+        return "Patients{" +
+                "patients=" + patientList +
+                '}';
     }
 }
